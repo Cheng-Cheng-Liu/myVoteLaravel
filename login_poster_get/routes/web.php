@@ -36,5 +36,6 @@ Route::prefix('back')->middleware('auth')->group(function(){
     Route::get('/addVote', [VoteController::class,'addVotepage']);
     Route::post('/addVote', [VoteController::class,'store']);
     Route::post('/{id}', [VoteController::class,'votepage']);
+    Route::get('/listVotes', [VoteController::class,'listVotes']);
 });
 

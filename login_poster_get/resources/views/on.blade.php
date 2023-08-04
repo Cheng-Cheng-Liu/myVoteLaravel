@@ -37,9 +37,9 @@
             <li class="nav-item">
               
               @if(auth()->check())
-              <a class='nav-link' href='back.php'>會員中心</a>
+              <a class='nav-link' href='/back/member'>會員中心</a>
             @else
-            <a class='nav-link' href='index.php?go=sign_in'>會員登入</a>
+            <a class='nav-link' href='/front/login'>會員登入</a>
           @endif
                 
               

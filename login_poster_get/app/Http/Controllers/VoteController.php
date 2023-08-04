@@ -65,4 +65,14 @@ foreach($options as $opt){
 
         return view("back.votepage",['id'=>$id]);
     }
+
+
+    function listVotes(Request $req){
+        $today=date("Y-m-d H:i:s");
+       
+        $topic=Topic::all();
+        
+        return view("on",["topics"=>$topic]);
+
+    }
 }
