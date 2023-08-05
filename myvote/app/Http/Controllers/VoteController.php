@@ -48,7 +48,12 @@ foreach($options as $opt){
 
     }
 
+    function editVotePage(Request $req,$id){
+        $editTopic=Topic::find($id);
+        
+        return view('back.editVotepage',['id'=>$id]);
 
+    }
 
 
 
@@ -62,17 +67,19 @@ foreach($options as $opt){
     }
 
     function votepage(Request $request, $id){
-
+        $user_id = Auth::id();
         return view("back.votepage",['id'=>$id]);
     }
 
+    function vote(){
 
+    }
     function listVotes(Request $req){
-        $today=date("Y-m-d H:i:s");
+        
        
         $topic=Topic::all();
         
-        return view("on",["topics"=>$topic]);
+        return view("back.listVotes",["topics"=>$topic]);
 
     }
 }

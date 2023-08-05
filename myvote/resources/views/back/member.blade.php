@@ -22,30 +22,17 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link "  href="index.php?go=hot">熱門投票TOP 10</a>
+                <a class="nav-link "  href="/">回首頁</a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" href="index.php?go=on">正在進行的投票</a>
+                <a class="nav-link" href="addVote">新增投票</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?go=going_to_start">即將開始的投票</a>
+                <form class="nav-link" method="post"action="/back/listVotes">@csrf<input type="submit" value="編輯投票"></form>
             </li>
+            
             <li class="nav-item">
-                <a class="nav-link " href="index.php?go=history">已結束的投票</a>
-            </li>
-            <li class="nav-item">
-              
-              @if(auth()->check())
-              <a class='nav-link' href='/back/member'>會員中心</a>
-            @else
-            <a class='nav-link' href='/front/login'>會員登入</a>
-          @endif
-                
-              
-                
-              
-                
                 
             </li>
             </ul>
@@ -57,48 +44,7 @@
         </div>
       </nav>
       
-      @foreach($topics as $topic)
-      <form method="post" style="width=100%;" action="/back/{{$topic->id}}">
-      @csrf
-      <button style="width=100%;">
-<table style="text-align:center;align-items:center;" class="table table-hover ">
-
-    <tr >
-        
-        
-        
-        <td style="width:20%;">
-<img src="{{asset('storage/'.$topic->img)}}" style="width:100%;height=20vh;">
-        </td>
-        <td style="width:30%;">
-        {{$topic->subject}}
-  </td>
-  <td style="font_size:2%;width:20%;">
-  {{$topic->start_time}}
-  <br><br>
-  ~<br><br>
-  {{$topic->stop_time}}
-  
-
-  </td>
-        <td style="width:10%;">
-        {{$topic->total}}
-        
-        </td>
-        
-        
-        
-    </tr>
-    
-    
-    
-    
-</table>
-</button>
-</form>
-
-
-@endforeach
+      
 
 </body>
 </html>
