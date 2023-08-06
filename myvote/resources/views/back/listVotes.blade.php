@@ -15,79 +15,80 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark box">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">MYVOTE</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link "  href="/">回首頁</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="addVote">新增投票</a>
-            </li>
-            <li class="nav-item">
-                <form class="nav-link" method="post"action="/back/listVotes">@csrf<input type="submit" value="編輯投票"></form>
-            </li>
-            
-            <li class="nav-item">
-                
-            </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark box">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">MYVOTE</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link " href="/">回首頁</a>
+          </li>
 
-  @foreach($topics as $topic)
-  <form method="post" style="width:100%;" action="/back/editVotePage/{{$topic->id}}">
-    @csrf
-    <button style="width:100%;">
-      <table style="text-align:center;align-items:center;" class="table table-hover ">
+          <li class="nav-item">
+            <a class="nav-link" href="addVote">新增投票</a>
+          </li>
+          <li class="nav-item">
+            <form class="nav-link" method="post" action="/back/listVotes">@csrf<input type="submit" value="編輯投票"></form>
+          </li>
 
-        <tr>
+          <li class="nav-item">
+
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
 
 
+  <table style="text-align:center;align-items:center;" class="table table-hover ">
 
-          <td style="width:20%;">
-            <img src="{{asset('storage/'.$topic->img)}}" style="width:100%;height:20vh;">
-          </td>
-          <td style="width:30%;">
-            {{$topic->subject}}
-          </td>
-          <td style="font-size:2%;width:20%;">
-            {{$topic->start_time}}
-            <br><br>
-            ~<br><br>
-            {{$topic->stop_time}}
+    @foreach($topics as $topic)
 
 
-          </td>
-          <td style="width:10%;">
-            {{$topic->total}}
+    <tr>
+      <td style="width:8%;">
 
-          </td>
+        {{$topic->subject}}
+      </td>
+
+      <td style="width:10%;">
+        {{$topic->start_time}}
+      </td>
+      <td style="width:10%;">
+        {{$topic->stop_time}}
+
+      </td>
+      <td style="width:20%;">
+        <a>立即上架</a>
+      </td>
+      <td style="width:20%;">
+        <a href="./api/now_stop.php?id='topic_id'; ?>">立即下架</a>
+      </td>
+
+      <td style="width:20%;">
+        <form method="post" style="width:100%;" action="/back/editVotePage/{{$topic->id}}">@csrf<button>修改</button>
+        </form>
+      </td>
+      <td style="width:20%;">
+        <form method="post" style="width:100%;" action="/back/delVote/{{$topic->id}}">@csrf<button>刪除</button>
+        </form>
+      </td>
 
 
 
-        </tr>
+
+      @endforeach
+  </table>
 
 
 
-
-      </table>
-    </button>
-  </form>
-
-
-  @endforeach
 
 </body>
 

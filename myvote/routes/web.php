@@ -32,7 +32,8 @@ Route::prefix('back')->middleware('auth')->group(function () {
     Route::post('/addVote', [VoteController::class, 'store']);
     Route::post('/editVotePage/{id}', [VoteController::class, 'editVotePage']);
     Route::post('/editVote', [VoteController::class, 'editVote']);
-
+    Route::post('/delVote/{id}', [VoteController::class, 'delVote']);
+    Route::get('/listVotes', [VoteController::class, 'listVotes']);
     Route::post('/votepage/{id}', [VoteController::class, 'votepage']);
     Route::post('/listVotes', [VoteController::class, 'listVotes']);
 });

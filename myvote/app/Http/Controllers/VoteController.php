@@ -49,6 +49,7 @@ class VoteController extends Controller
 
             $option->save();
         }
+        return redirect('/back/listVotes');
     }
 
     function editVotePage(Request $req, $id)
@@ -120,10 +121,28 @@ class VoteController extends Controller
 
             
         }
+        return redirect('/back/listVotes');
     }
 
 
+    public function delVote(Request $req,$id)
+    {
 
+        $topic = Topic::find($id);
+
+
+        
+        $topic->delete();
+
+           
+
+        Option::where('topic_id', $id)->delete();
+
+
+            
+        
+        return redirect('/back/listVotes');
+    }
     // 前台投票查詢與投票
     function on(Request $req)
     {
