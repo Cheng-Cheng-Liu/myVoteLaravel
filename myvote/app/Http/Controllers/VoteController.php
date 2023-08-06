@@ -118,7 +118,7 @@ class VoteController extends Controller
             }
 
 
-            return "Options updated successfully!";
+            
         }
     }
 
