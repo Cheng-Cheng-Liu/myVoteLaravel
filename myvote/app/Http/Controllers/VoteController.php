@@ -144,13 +144,16 @@ class VoteController extends Controller
         return redirect('/back/listVotes');
     }
     // 前台投票查詢與投票
-    function on(Request $req)
+    function index(){
+        return view("index");
+    }
+    function on(Request $req,$id)
     {
         $today = date("Y-m-d H:i:s");
 
-        $topic = Topic::where('start_time', '<', $today)->where('stop_time', '>', $today)->get();
+        $topic = Topic::where('start_time', '<', $today)->where('stop_time', '>', $today)->take($id)->get();
 
-        return view("on", ["topics" => $topic]);
+        return view("modals.on", ["topics" => $topic]);
     }
 
     function votepage(Request $request, $id)

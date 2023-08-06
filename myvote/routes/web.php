@@ -14,8 +14,8 @@ use App\Http\Controllers\VoteController;
 |
 */
 
-Route::get('/', [VoteController::class, 'on']);
-
+Route::get('/', [VoteController::class, 'index']);
+Route::get('/modals/on/{id}', [VoteController::class, 'on']);
 
 Route::prefix('front')->group(function () {
     Route::get('/login', [UserController::class, 'loginpage']);
