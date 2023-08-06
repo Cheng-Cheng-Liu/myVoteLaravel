@@ -13,32 +13,32 @@
 </head>
 
 <body class="container-fluid">
-<form action="/back/addVote" method="post" enctype="multipart/form-data">
+<form action="/back/editVote" method="post" enctype="multipart/form-data">
 @csrf
-<input type="hidden" value="{{$id}}">
+<input type="hidden" name="id" value="{{$id}}">
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">主題</label>
-        <input type="text" class="form-control"  name="subject">
+        <label for="exampleInputEmail1" class="form-label" >主題</label>
+        <input type="text" class="form-control"  name="subject" value="{{$aTopic->subject}}">
     </div>
     <div class="time-set">
         <div>
             <label>開啟時間</label>
-            <input type="datetime-local" name="start_time">
+            <input type="datetime-local" name="start_time" value="{{$aTopic->start_time}}">
         </div>
         <div>
             <label>關閉時間</label>
-            <input type="datetime-local" name="stop_time">
+            <input type="datetime-local" name="stop_time" value="{{$aTopic->stop_time}}">
         </div>
     </div>
     <div>
             <label for="img">上傳圖檔：</label>
-            <input type="file" name="img" id="img">
+            <input type="file" name="img" id="img" value="{{$aTopic->img}}">
         </div>
 
     <div class="mb-3">
     <label for="type">單複選：</label>
-            <input type="radio" name="q_type" value="1">單選&nbsp;&nbsp;
-            <input type="radio" name="q_type" value="2">複選
+            <input type="radio" name="q_type" value="1" @if($aTopic->q_type==1) checked @endif >單選&nbsp;&nbsp;
+            <input type="radio" name="q_type" value="2" @if($aTopic->q_type==2) checked @endif >複選
     </div>
     <div class="options">
         <div>
@@ -75,7 +75,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
-<script>
+</script>
 </body>
 
 </html>

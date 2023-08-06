@@ -14,35 +14,25 @@ use App\Http\Controllers\VoteController;
 |
 */
 
-Route::get('/', [VoteController::class,'on']);
-Route::prefix('front')->group(function(){
-    Route::get('/login', [UserController::class,'loginpage']);
-    Route::post('/login', [UserController::class,'authenticate']);
+Route::get('/', [VoteController::class, 'on']);
 
 
-    Route::get('/register', [UserController::class,'registerpage']);
-    Route::post('/register', [UserController::class,'register']);
-    
-
-
-
-
-
-
-
-});
-Route::prefix('back')->middleware('auth')->group(function(){
-    Route::get('/member', [UserController::class,'memberpage']);
-    Route::get('/addVote', [VoteController::class,'addVotepage']);
-    Route::post('/addVote', [VoteController::class,'store']);
-    Route::post('/editVotePage/{id}', [VoteController::class,'editVotePage']);
-    
-    Route::post('/votepage/{id}', [VoteController::class,'votepage']);
-    Route::post('/listVotes', [VoteController::class,'listVotes']);
-
-
-
-
+Route::prefix('front')->group(function () {
+    Route::get('/login', [UserController::class, 'loginpage']);
+Route::post('/login', [UserController::class, 'authenticate']);
+Route::get('/register', [UserController::class, 'registerpage']);
+Route::post('/register', [UserController::class, 'register']);
 
 });
 
+
+Route::prefix('back')->middleware('auth')->group(function () {
+    Route::get('/member', [UserController::class, 'memberpage']);
+    Route::get('/addVote', [VoteController::class, 'addVotepage']);
+    Route::post('/addVote', [VoteController::class, 'store']);
+    Route::post('/editVotePage/{id}', [VoteController::class, 'editVotePage']);
+    Route::post('/editVote', [VoteController::class, 'editVote']);
+
+    Route::post('/votepage/{id}', [VoteController::class, 'votepage']);
+    Route::post('/listVotes', [VoteController::class, 'listVotes']);
+});
