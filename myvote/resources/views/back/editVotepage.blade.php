@@ -40,14 +40,19 @@
             <input type="radio" name="q_type" value="1" @if($aTopic->q_type==1) checked @endif >單選&nbsp;&nbsp;
             <input type="radio" name="q_type" value="2" @if($aTopic->q_type==2) checked @endif >複選
     </div>
+    
+    
     <div class="options">
+    @foreach($options as $opt)
         <div>
             <label for="description">項目：</label>
-            <input type="text" name="opt[]" class="description-input">
+            <input type="text" name="opt[{{$opt->id}}]" class="description-input" value="{{$opt->opt}}"> 
             <span onclick="addOption()">+</span>
             <span onclick="removeOption(this)">-</span>
         </div>
+    @endforeach   
     </div>
+    
     
     </br>
     

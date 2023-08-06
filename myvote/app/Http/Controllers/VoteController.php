@@ -19,7 +19,7 @@ class VoteController extends Controller
     }
 
 
-    
+
     function store(Request $req)
     {
         $topic = new Topic;
@@ -54,43 +54,77 @@ class VoteController extends Controller
     function editVotePage(Request $req, $id)
     {
         $aTopic = Topic::find($id);
+        $options = Option::where('topic_id', $id)->get();
+        
 
-        return view('back.editVotepage', ['id' => $id,'aTopic'=>$aTopic]);
+        return view('back.editVotepage', ['id' => $id, 'aTopic' => $aTopic, 'options' => $options]);
     }
+
+
+
     public function editVote(Request $req)
-{
-    
-    $topic = Topic::find($req->input('id'));
-    
-    
-    if ($topic) {
-        
-        if ($req->hasFile('img') && $req->file('img')->isValid()) {
-            $imgName = $req->file('img')->getClientOriginalName();
-            $topic->img = $imgName;
-            $req->file('img')->storeAs('public', $imgName);
+    {
+
+        $topic = Topic::find($req->input('id'));
+
+
+        if ($topic) {
+
+            if ($req->hasFile('img') && $req->file('img')->isValid()) {
+                $imgName = $req->file('img')->getClientOriginalName();
+                $topic->img = $imgName;
+                $req->file('img')->storeAs('public', $imgName);
+            }
+
+
+            $topic->user_id = Auth::id();;
+            $topic->subject = $req->input('subject');
+            $topic->start_time = $req->input('start_time');
+            $topic->stop_time = $req->input('stop_time');
+            $topic->q_type = $req->input('q_type');
+
+
+            $topic->save();
+
+            $topicId = $req->input('id');
+            $postOpts = $req->input('opt');
+
+
+            $options = Option::where('topic_id', $topicId)->get();
+
+
+            foreach ($options as $option) {
+                $optId = $option->opt_id;
+
+                if (!isset($postOpts[$optId])) {
+
+                    $option->delete();
+                } else {
+
+                    $option->opt = $postOpts[$optId];
+                    $option->save();
+
+
+                    unset($postOpts[$optId]);
+                }
+            }
+
+
+            foreach ($postOpts as $optValue) {
+                Option::create([
+                    'topic_id' => $topicId,
+                    'opt' => $optValue,
+                ]);
+            }
+
+
+            return "Options updated successfully!";
         }
-        
-        
-        $topic->user_id = Auth::id();;
-        $topic->subject = $req->input('subject');
-        $topic->start_time = $req->input('start_time');
-        $topic->stop_time = $req->input('stop_time');
-        $topic->q_type = $req->input('q_type');
-
-       
-        $topic->save();
-
-        echo "here";
-        
     }
 
-    
-}
 
 
-
-// 前台投票查詢與投票
+    // 前台投票查詢與投票
     function on(Request $req)
     {
         $today = date("Y-m-d H:i:s");
